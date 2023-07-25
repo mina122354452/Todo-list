@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>to do list</title>
+    <link rel="stylesheet" href="cstjs.css">
+
+</head>
+
+<body>
+    <div class="todo-container">
+        <div class="add-task">
+            <input type="text">
+            <span class="plus">+</span>
+        </div>
+        <hr>
+        <div>
+            <p class="name">Hello</p> <span class="the-name"></span><span class="edit">Edit</span>
+        </div>
+        <div>
+            <span class="delete-all">delete all</span>
+            <span class="finish-all">finish all</span>
+        </div>
+        <div class="tasks-content">
+            <span class="no-tasks-message">No tasks to show</span>
+        </div>
+    </div>
+    <div class="task-stats">
+        <div class="tasks-count">
+            tasks <span>0</span>
+        </div>
+        <div class="tasks-completed">
+            completed <span>0</span>
+        </div>
+    </div>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+
+    <script src="m.js "></script>
+</body>
+
+</html>
