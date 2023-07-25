@@ -56,7 +56,7 @@ theAddButton.onclick = function() {
     if (theInput.value === '' || theInput.value === ' ') {
         console.log("no value");
         calcTasks();
-        swal("Hey!", "there is a same one or there is a same one");
+        swal("Hey!", "You didn't write a task or there is a same one");
 
     } else {
 
