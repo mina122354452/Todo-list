@@ -45,17 +45,18 @@ theAddButton.onclick = function() {
         let check = theInput.value === element.firstChild.textContent;
 
         if (check === true) {
+            swal("Hey!", "there is a same one");
+
             console.log("there is a same one");
             theInput.value = "";
-            swal("Wait a minute!", "You wrote this task before");
-        }
-        calcTasks()
+
+        };
+        calcTasks();
     };
     if (theInput.value === '' || theInput.value === ' ') {
         console.log("no value");
         calcTasks();
-        swal("you didn't write any task !")
-
+        swal("Hey!", "there is a same one or there is a same one");
 
     } else {
 
@@ -89,32 +90,30 @@ theAddButton.onclick = function() {
 
 document.addEventListener('click', function(e) {
     if (e.target.className == 'delete') {
-        swal("Are you sure?", {
-                buttons: {
-                    cancel: "no",
 
-                    yes: true,
-                },
+
+        swal({
+                title: "Are you sure?",
+                text: "Once deleted, you will not be able to recover this imaginary file!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
             })
-            .then((value) => {
-                switch (value) {
-
-
-                    case "yes":
-                        swal("Deleted!", "the task deleted", "success");
-                        e.target.parentNode.remove();
-                        calcTasks();
-                        if (tasksContainer.childElementCount === 0) {
-                            createNoTasks()
-                        };
-                        saveData();
-
-                        break;
+            .then((willDelete) => {
+                if (willDelete) {
+                    e.target.parentNode.remove();
+                    calcTasks();
+                    if (tasksContainer.childElementCount === 0) {
+                        createNoTasks()
+                    };
+                    saveData();
+                    swal("Poof! Your task has been deleted!", {
+                        icon: "success",
+                    });
+                } else {
+                    swal("Your task is safe!");
                 }
             });
-
-
-
 
     };
     if (e.target.classList.contains('task-box')) {
@@ -152,25 +151,48 @@ e.onclick = function() {
     if (document.querySelectorAll('.tasks-content .task-box').length == 0) {
         swal("you didn't write any task !");
     } else {
-        swal("Are you sure?", {
-                buttons: {
-                    cancel: "no",
+        // swal("Are you sure?", {
+        //         buttons: {
+        //             cancel: "no",
 
-                    yes: true,
-                },
+        //             yes: true,
+        //         },
+        //     })
+        //     .then((value) => {
+        //         switch (value) {
+        //             case "yes":
+        //                 swal("Deleted!", "all tasks deleted", "success");
+        //                 document.querySelector(".tasks-content").innerHTML = "";
+        //                 if (tasksContainer.childElementCount === 0) {
+        //                     createNoTasks();
+        //                     calcTasks();
+        //                 };
+        //                 calcTasks();
+        //                 saveData();
+        //                 break;
+        //         }
+        //     });
+
+
+
+        swal({
+                title: "Are you sure?",
+                text: "Once deleted, you will not be able to recover this task!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
             })
-            .then((value) => {
-                switch (value) {
-                    case "yes":
-                        swal("Deleted!", "all tasks deleted", "success");
-                        document.querySelector(".tasks-content").innerHTML = "";
-                        if (tasksContainer.childElementCount === 0) {
-                            createNoTasks();
-                            calcTasks();
-                        };
+            .then((willDelete) => {
+                if (willDelete) {
+                    document.querySelector(".tasks-content").innerHTML = "";
+                    if (tasksContainer.childElementCount === 0) {
+                        createNoTasks();
                         calcTasks();
-                        saveData();
-                        break;
+                    };
+                    calcTasks();
+                    saveData();
+                } else {
+                    swal("Your task is safe!");
                 }
             });
     }
