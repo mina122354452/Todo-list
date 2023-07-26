@@ -40,6 +40,57 @@ document.querySelector(".edit").onclick = function() {
         else console.log(name), document.querySelector(".the-name").innerHTML = name, localStorage.setItem("name", name), document.querySelector(".name").innerHTML = "Hello";
     });
 }
+document.addEventListener('keydown', (event) => {
+    var name = event.key;
+    var code = event.code;
+    if (name === 'Enter') {
+        for (const element of tasksContainer.children) {
+            let check = theInput.value === element.firstChild.textContent;
+
+            if (check === true) {
+                swal("Hey!", "there is a same one");
+
+                console.log("there is a same one");
+                theInput.value = "";
+
+            };
+            calcTasks();
+        };
+        if (theInput.value === '' || theInput.value === ' ') {
+            console.log("no value");
+            calcTasks();
+            swal("Hey!", "You didn't write a task or there is a same one");
+
+        } else {
+
+            noTasksMsg = document.querySelector(".no-tasks-message");
+            if (document.body.contains(document.querySelector(".no-tasks-message"))) {
+                noTasksMsg.remove();
+            }
+            let mainSpan = document.createElement("span");
+            let deleteElement = document.createElement("span");
+            let text = document.createTextNode(theInput.value);
+            let deleteText = document.createTextNode("delete");
+            mainSpan.appendChild(text);
+            mainSpan.className = 'task-box';
+            deleteElement.appendChild(deleteText);
+            deleteElement.className = 'delete';
+            mainSpan.appendChild(deleteElement);
+            tasksContainer.appendChild(mainSpan);
+            theInput.value = "";
+            theInput.focus();
+            console.log("success");
+            calcTasks();
+            swal({
+                title: "The Task added!",
+                text: "let's Finfish it !",
+                icon: "success",
+                button: "okey",
+            });
+        }
+        saveData();
+    }
+});
 theAddButton.onclick = function() {
     for (const element of tasksContainer.children) {
         let check = theInput.value === element.firstChild.textContent;
